@@ -52,7 +52,7 @@ class Asset extends Base {
 		return this.id && this.title && this.image && this.description && this.broadcastStartTime && this.duration;
 	}
 
-	addDuration() {
+	generateBroadcastEndTime() {
 		let broadcastStart = new Date(this.broadcastStartTime);
 		broadcastStart.setSeconds(broadcastStart.getSeconds() + this.duration);
 		this.broadcastEndTime = broadcastStart.toISOString();
@@ -72,7 +72,7 @@ class Asset extends Base {
 	result() {
 		if (!this.hasValidKeys()) return false;
 		this.imageDomainReplace();
-		this.addDuration();
+		this.generateBroadcastEndTime();
 		const match = this.validateMatch();
 
 		return {
